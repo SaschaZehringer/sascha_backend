@@ -1,0 +1,49 @@
+version: '3'
+
+networks:
+    # web:
+    #   external:
+    #     name: web
+    podman:
+        driver: bridge
+    sascha_backend:
+        external: false
+
+volumes:
+    postgres:
+
+services:
+    sascha_backend:
+        build:
+            context: .
+            dockerfile: container/Containerfile
+        image: registry.zehringer.me/sascha_backend:latest
+        container_name: sascha-backend
+        restart: always
+        env_file:
+            - .env
+        networks:
+            - sascha_backend
+        ports:
+            - "3333:${APP_PORT}"
+      
+    sascha_db:
+        build:
+            context: .
+            dockerfile: container/db.Containerfile
+        image: registry.zehringer.me/sascha_db:latest
+        container_name: sascha-db
+        restart: always
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_DB=${DATABASE_NAME}
+            - POSTGRES_USER=${DATABASE_USERNAME}
+            - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+        ports:
+            - "5002:5432"
+        networks:
+            - podman
+            - sascha_backend
+        volumes:
+            - postgres:/var/lib/postgresql/data
