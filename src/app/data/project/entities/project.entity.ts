@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { ApiProperty } from "@nestjs/swagger";
 import { SkillProject } from "../../skills/entities/skill-project.entity";
+import { ProjectLink } from "./project-links.entity";
 
 @Entity()
 export class Project {
@@ -16,10 +17,12 @@ export class Project {
 	@ApiProperty()
 	description: string;
 
-	@Column()
+	@OneToMany(() => ProjectLink, (projectLink) => projectLink.project, {
+		cascade: true,
+	})
 	@ApiProperty()
-	link: string;
-	
+	projectLinks: ProjectLink[];
+
 	@OneToMany(() => SkillProject, (skillProject) => skillProject.project, {
 		cascade: true,
 	})

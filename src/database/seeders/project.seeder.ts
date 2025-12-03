@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { ProjectLink } from "src/app/data/project/entities/project-links.entity";
 import { Project } from "src/app/data/project/entities/project.entity";
 import { SkillProject } from "src/app/data/skills/entities/skill-project.entity";
 import { DataSource } from "typeorm";
@@ -10,6 +11,7 @@ export class ProjectSeeder {
 
 	async run() {
 		const repoProject = this.dataSource.getRepository(Project);
+		const repoProjectLinks = this.dataSource.getRepository(ProjectLink);
 		const repoSkillProject = this.dataSource.getRepository(SkillProject);
 		
 		if (await repoProject.count() > 0) {
@@ -20,20 +22,40 @@ export class ProjectSeeder {
 			return;
 		}
 
-		await repoProject.insert([
+		const projects = repoProject.create([
 			{
 				id: 1,
 				name: "Sascha Backend",
 				description: "sascha/backend",
-				link: "https://forgejo.zehringer.net/sascha/backend",
+				projectLinks: [
+					{
+						id: 1,
+						link: "https://forgejo.zehringer.net/sascha/backend",
+					},
+					{
+						id: 2,
+						link: "https://github.com/SaschaZehringer/sascha_backend",
+					}
+				]
 			},
 			{
 				id: 2,
 				name: "Sascha Frontend",
 				description: "sascha/frontend",
-				link: "https://forgejo.zehringer.net/sascha/frontend",
+				projectLinks: [
+					{
+						id: 3,
+						link: "https://forgejo.zehringer.net/sascha/frontend",
+					},
+					{
+						id: 4,
+						link: "https://github.com/SaschaZehringer/sascha_frontend",
+					}
+				]
 			},
 		]);
+
+		await repoProject.save(projects);
 
 		await repoSkillProject.insert([
 			{

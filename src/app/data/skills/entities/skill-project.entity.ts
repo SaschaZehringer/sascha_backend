@@ -17,7 +17,6 @@ export class SkillProject {
 	@ApiProperty()
 	projectId: Project["id"];
 
-	// Add the relationship to Skill
 	@ManyToOne(() => Skill, { onDelete: "CASCADE" })
 	@JoinColumn([
 		{ name: "skillName", referencedColumnName: "name" },
@@ -25,7 +24,6 @@ export class SkillProject {
 	])
 	skill: Skill;
 
-	// Add the relationship to Project
 	@ManyToOne(() => Project, (project) => project.skillProjects, {
 		onDelete: "CASCADE",
 	})

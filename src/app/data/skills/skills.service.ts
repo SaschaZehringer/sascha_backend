@@ -24,7 +24,9 @@ export class SkillsService {
 		const skillsDB: Skill[] = await this.skillRepo.find({
 			relations: {
 				skillProjects: {
-					project: true
+					project: {
+						projectLinks: true
+					}
 				},
 			},
 			order: {
@@ -57,7 +59,9 @@ export class SkillsService {
 			},
 			relations: {
 				skillProjects: {
-					project: true,
+					project: {
+						projectLinks: true
+					},
 				},
 			},
 		});

@@ -85,7 +85,7 @@ async function bootstrap() {
 	const projectSeeder = app.get(ProjectSeeder);
 	await projectSeeder.run();
 
-	app.use(passport.initialize());
+	// app.use(passport.initialize());
 
 	// const options = new DocumentBuilder()
 	// 	.setTitle("SaschaBackend")

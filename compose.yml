@@ -41,7 +41,7 @@ services:
             - POSTGRES_USER=${DATABASE_USERNAME}
             - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
         ports:
-            - "5002:5432"
+            - "${DATABASE_PORT}:5432"
         networks:
             - podman
             - sascha_backend

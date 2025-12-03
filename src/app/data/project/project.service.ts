@@ -19,6 +19,7 @@ export class ProjectService {
 	async findAll() {
 		return this.projectRepo.find({
 			relations: {
+				projectLinks: true,
 				skillProjects: {
 					project: true
 				},
@@ -32,6 +33,7 @@ export class ProjectService {
 				id: id,
 			},
 			relations: {
+				projectLinks: true,
 				skillProjects: {
 					project: true,
 				},

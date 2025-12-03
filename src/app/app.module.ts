@@ -33,6 +33,7 @@ import { EducationSeeder } from "src/database/seeders/education.seeder";
 import { SkillSeeder } from "src/database/seeders/skill.seeder";
 import { ProjectSeeder } from "src/database/seeders/project.seeder";
 import { SkillProject } from "./data/skills/entities/skill-project.entity";
+import { ProjectLink } from "./data/project/entities/project-links.entity";
 
 @Module({
 	imports: [
@@ -69,6 +70,7 @@ import { SkillProject } from "./data/skills/entities/skill-project.entity";
 				Education,
 				Experience,
 				Project,
+				ProjectLink,
 			],
 			synchronize: true,
 			logging: true,
