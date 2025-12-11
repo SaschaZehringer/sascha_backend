@@ -1,11 +1,11 @@
 import { NestFactory } from "@nestjs/core";
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+// import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { WinstonModule } from "nest-winston";
 import * as winston from "winston";
 import { AppModule } from "./app/app.module";
 import { LogLevel } from "./common/enums/log-level.enum";
-import * as passport from "passport";
-import { DataSource } from "typeorm";
+// import * as passport from "passport";
+// import { DataSource } from "typeorm";
 import { PersonalInfoSeeder } from "./database/seeders/personal-info.seeder";
 import { ExperienceSeeder } from "./database/seeders/experience.seeder";
 import { EducationSeeder } from "./database/seeders/education.seeder";
@@ -116,4 +116,4 @@ async function bootstrap() {
 	await app.listen(process.env.APP_PORT ? parseInt(process.env.APP_PORT, 10) : 3000);
 }
 
-bootstrap();
+void bootstrap();

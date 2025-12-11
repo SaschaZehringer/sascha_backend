@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import { ProjectLink } from "src/app/data/project/entities/project-links.entity";
 import { Project } from "src/app/data/project/entities/project.entity";
 import { SkillProject } from "src/app/data/skills/entities/skill-project.entity";
 import { DataSource } from "typeorm";
@@ -11,7 +10,6 @@ export class ProjectSeeder {
 
 	async run() {
 		const repoProject = this.dataSource.getRepository(Project);
-		const repoProjectLinks = this.dataSource.getRepository(ProjectLink);
 		const repoSkillProject = this.dataSource.getRepository(SkillProject);
 		
 		if (await repoProject.count() > 0) {
